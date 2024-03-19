@@ -42,7 +42,8 @@ def scrape_talk_urls(conference_url):
     all_links = ["https://www.churchofjesuschrist.org" + a["href"]
             for a in div.find_all("a", href=True)
             if re.search("^/study/general-conference/\d{4}/(04|10)/.*[?]lang=eng", a["href"])
-            and "session" not in a["href"]]
+            and "session" not in a["href"]
+            and "sustaining-of-church" not in a["href"]]
     return all_links
 
 def scrape_talk_data(url):
@@ -87,7 +88,7 @@ def scrape_talk_data(url):
         content = ""
 
         for paragraph in content_array:
-            content = content + paragraph.text + "\n\n"
+            content = content + paragraph.text + "\n"
 
         all_foot_notes = soup.find_all("p")
         footnotes = 'FOOTNOTES:\n'
@@ -148,7 +149,7 @@ for col in conference_df.columns:
 
 print(conference_df)
 # finish
-conference_df.to_csv("conference_talks.csv", index=False)
+conference_df.to_csv("data/conference_talks.csv", index=False)
 
 end = time.time()
 print(end - start)
