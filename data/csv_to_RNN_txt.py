@@ -7,7 +7,7 @@ df = pd.read_csv("data/conference_talks.csv")
 talk_values = df['talk'].tolist()
 
 # Write the values to a text file
-with open("talk_values.txt", "w", encoding="utf-8") as file:
+with open("data/talk_values.txt", "w", encoding="utf-8") as file:
     for talk in talk_values:
         file.write(str(talk) + "\n")
 
