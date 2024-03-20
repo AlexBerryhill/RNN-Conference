@@ -1,16 +1,25 @@
 import csv
 import os
 
-def read_first_100mb(file_path):
-    with open(file_path, 'rb') as file:
-        return file.read(100 * 1024 * 1024)  # Read the first 200MB
+# Open the CSV file
+with open('./data/recipies/recipes_data.csv', 'r') as csv_file:
+    reader = csv.reader(csv_file)
+    
+    # Open the output text file
+    with open('./data/recipies/recipes.txt', 'w') as txt_file:
+        # Iterate over each row in the CSV file
+        for row in reader:
+            # Extract the title, ingredients, and directions from the row
+            title = row[0]
+            ingredients = row[1]
+            directions = row[2]
+            
+            # Write the title, ingredients, and directions to the text file
+            txt_file.write(f"{title}\n{ingredients}\n{directions}\n\n")
 
-# Use the function
-data = read_first_100mb('./data/recipies/recipes.txt')
+            # Check the size of the output file
+            txt_file.flush()  # Ensure all data is written to disk
+            if os.path.getsize('./data/recipies/recipes.txt') > 100 * 1024 * 1024:  # 200MB
+                break  # Stop writing if the file size limit is reached
 
-def write_data_to_file(data, file_path):
-    with open(file_path, 'wb') as file:
-        file.write(data)
-
-# Use the function
-write_data_to_file(data, './data/recipies/recipes_200mb.txt')
+print("Text file with recipes has been created.")
