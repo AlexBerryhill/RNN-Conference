@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Read the CSV file into a pandas DataFrame
-df = pd.read_csv("data/conference_talks.csv")
+df = pd.read_csv("data/conference/conference_talks.csv")
 
 # Extract the values of the "talk" column
 talk_values = df['talk'].tolist()
@@ -13,7 +13,7 @@ chars_to_remove = ['#', '$', '%', '&', '*', '+','=','[', ']', '_','\xa0', '¡', 
 trans_table = str.maketrans({key: None for key in chars_to_remove})
 
 # Write the values to a text file
-with open("data/talk_values.txt", "w", encoding="utf-8") as file:
+with open("data/conference/conference_talks.txt", "w", encoding="utf-8") as file:
     for talk in talk_values:
         # Remove the unwanted characters and write the result to the file
         file.write(str(talk).translate(trans_table) + "\n")
