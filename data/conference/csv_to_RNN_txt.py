@@ -16,6 +16,6 @@ trans_table = str.maketrans({key: None for key in chars_to_remove})
 with open("data/conference/conference_talks.txt", "w", encoding="utf-8") as file:
     for talk in talk_values:
         # Remove the unwanted characters and write the result to the file
-        file.write(str(talk).translate(trans_table) + "\n")
+        file.write(str(talk).translate(trans_table))
 
 print("Text file with talk values has been created.")
